@@ -1,5 +1,41 @@
-i {
-  width: 50px;
-  height: 50px;
-  color: yellow;
+.fa-bitcoin {
+  font-size: 60px;
+  background-color: white;
+  color: rgb(250, 154, 0);
+  border-radius: 50%;
+  transform: rotate(130deg);
+}
+
+h1 {
+  font-weight: lighter;
+}
+
+.container-crypto {
+  background-color: white;
+  width: 40%;
+  height: 700px;
+  padding: 10px;
+  position: relative;
+}
+
+.header-crypto {
+  background-color: #282c34;
+  padding: 10px;
+}
+
+.crypto-filter-container {
+  margin: 15px auto;
+}
+
+.inp-crypto-filter {
+  height: 35px;
+  outline: none;
+  background-color: white;
+  border-style: solid;
+  border-radius: 3px;
+  padding-left: 10px;
+}
+
+.inp-crypto-filter:hover {
+  border-color: turquoise;
 }
