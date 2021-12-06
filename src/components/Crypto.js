@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './css/Crypto.css'
 
 // get our fontawesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
+import CryptoList from "./CryptoList";
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+// axios
+import axios from "axios";
+
 
 
 
@@ -13,20 +18,43 @@ import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 const Crypto = () => {
 
 
+  const [notes, getNotes] = useState('')
+
+
+
+
+  const getDate = () => {
+    axios.get('https://blockchain.info/ticker', {
+      mode: 'corse',
+      method: 'GET'
+    })
+    .then(res => {
+      console.log(res.data);
+    })
+  }
+
+
+
+
+  useEffect(() => {
+    getDate();
+  })
+
 
 
   return (
-    <section class="container-crypto">
-      <header class="header-crypto">
+    <section className="container-crypto">
+      <header className="header-crypto">
         <FontAwesomeIcon icon={faBitcoin} />
-        <h1 class="title-crypto">Crypto Rate</h1>
+        <h1 className="title-crypto">Crypto Rate</h1>
       </header>
-      <div class="crypto-filter-container">
-      <input class="inp-crypto-filter" placeholder="Filter"></input>
+      <div className="crypto-filter-container">
+        <input className="inp-crypto-filter" placeholder="Filter"></input>
       </div>
       <section>
-      
+        <CryptoList />
       </section>
+      <CryptoList notes={notes} />
     </section>
   )
 }
