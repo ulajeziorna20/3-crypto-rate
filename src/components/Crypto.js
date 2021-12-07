@@ -18,7 +18,7 @@ import axios from "axios";
 const Crypto = () => {
 
 
-  const [notes, getNotes] = useState('')
+  const [data, setDate] = useState()
 
 
 
@@ -26,11 +26,19 @@ const Crypto = () => {
   const getDate = () => {
     axios.get('https://blockchain.info/ticker', {
       mode: 'corse',
-      method: 'GET'
+      method: 'GET',
+      data: {
+        limit: 2
+      }
     })
-    .then(res => {
-      console.log(res.data);
-    })
+      .then(res => {
+        console.log(res.data);
+
+        // getNotes(res.data)
+       
+      })
+  
+
   }
 
 
