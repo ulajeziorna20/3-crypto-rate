@@ -17,30 +17,26 @@ import axios from "axios";
 
 const Crypto = () => {
 
-
   const [data, setDate] = useState()
 
 
-
-
+  // pobieranie danych o kursach walut
   const getDate = () => {
     axios.get('https://blockchain.info/ticker', {
-      mode: 'corse',
-      method: 'GET',
-      data: {
-        limit: 2
-      }
+      mode: 'corse'
     })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
-        // getNotes(res.data)
-       
+        const coursesObj = res.data;
+        // console.log(coursesObj);
+
+        // setDate(coursesObj)
+        // console.log(data);
       })
-  
 
+      
   }
-
 
 
 
@@ -62,7 +58,7 @@ const Crypto = () => {
       <section>
         <CryptoList />
       </section>
-      <CryptoList notes={notes} />
+      <CryptoList data={data} />
     </section>
   )
 }
