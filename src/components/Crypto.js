@@ -20,6 +20,18 @@ const Crypto = () => {
   const [data, setDate] = useState()
 
 
+
+  useEffect(() => {
+    const interval = setInterval(() => { getDate() }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
+
+
+
   // pobieranie danych o kursach walut
   const getDate = () => {
     axios.get('https://blockchain.info/ticker', {
@@ -31,18 +43,12 @@ const Crypto = () => {
         const coursesObj = res.data;
         // console.log(coursesObj);
 
-        // setDate(coursesObj)
-        // console.log(data);
+        setDate(coursesObj)
+        console.log(data);
       })
-
-      
   }
 
 
-
-  useEffect(() => {
-    getDate();
-  })
 
 
 
