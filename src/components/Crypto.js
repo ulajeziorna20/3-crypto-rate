@@ -23,7 +23,7 @@ const Crypto = () => {
 
 
   useEffect(() => {
-    const interval = setInterval(() => { getCryptoRates() }, 3000);
+    const interval = setInterval(() => { getCryptoRates() }, 10000);
     // console.log(`on`);
 
     // console.log(`off`);
@@ -63,34 +63,27 @@ const Crypto = () => {
         console.log(ratesObj);
 
 
+        // let lastCryptoList = [];
 
-        setCryptoRates(() => {
+
+        for (const [tickerElem, cryptoRateObj] of Object.entries(ratesObj)) {
+
           let newCryptoList = [];
 
-          for (const [tickerElem, cryptoRate] of Object.entries(ratesObj)) {
-            let lastCryptoList = cryptoRates.find((cryptoObj) => {
-              return (cryptoObj.currency === tickerElem);
-            });
-
-
-
-            let newObj = {
-              currency: tickerElem,
-              symbol: cryptoRate.symbol,
-              sell: cryptoRate.sell,
-              buy: cryptoRate.buy,
-              lastRatePrice: cryptoRate.last,
-
-            }
-
-            newCryptoList.push(newCryptoObj);
+          let newObj = {
+            currency: tickerElem,
+            symbol: cryptoRateObj.symbol,
+            sell: cryptoRateObj.sell,
+            buy: cryptoRateObj.buy,
+            lastRatePrice: cryptoRateObj.last
 
           }
 
-        
+          // console.log(newObj);
+          // newCryptoList.push(newObj);
+          // console.log(newCryptoList);
 
-        })
-
+        }
 
 
 
