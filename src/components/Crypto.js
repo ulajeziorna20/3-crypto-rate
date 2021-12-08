@@ -66,9 +66,12 @@ const Crypto = () => {
         // let lastCryptoList = [];
 
 
+        let newCryptoList = [];
+         console.log(newCryptoList);
+
         for (const [tickerElem, cryptoRateObj] of Object.entries(ratesObj)) {
 
-          let newCryptoList = [];
+         
 
           let newObj = {
             currency: tickerElem,
@@ -81,7 +84,7 @@ const Crypto = () => {
 
           // console.log(newObj);
           // newCryptoList.push(newObj);
-          // console.log(newCryptoList);
+         
 
         }
 
