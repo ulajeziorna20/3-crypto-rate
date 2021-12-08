@@ -20,34 +20,74 @@ const Crypto = () => {
   const [cryptoRates, setCryptoRates] = useState({})
   const [isOn, setIsOn] = useState(false)
 
-
+ 
 
   useEffect(() => {
-    const interval = setInterval(() => { getCryptoRates() }, 10000);
+    const interval = setInterval(() => { getCryptoRates() }, 5000);
     // console.log(`on`);
 
-    // console.log(`off`);
-    return () => clearInterval(interval);
-
+    console.log(`useEffect interval`);
+    return (() => {
+      console.log(`useEffect interval KONCZY SIE `);
+      clearInterval(interval)
+    })
   }, []);
+  // tylko przy stworzeniu komponentu -->  pierwsze renderowanie
 
 
+  // nie ma drugiejo parametru. nie wazne ktory stan sie zmieni
   // useEffect(() => {
   //   console.log(`moj useEffect`);
+
+  //   return (() => {
+  //     console.log(`moj effekt KONCZY SIE`);
+  //   })
   // })
 
+  useEffect(() => {
+   
+    // if (isOn) {
+    //   console.log(`IsOn!`);
+    // } else {
+    //   console.log(`IsOff!`);
+    // }
+    
+    console.log(`useEffect ON/OFF`);
+
+    return (() => {
+      console.log(`useEffect ON/OFF KONCZY SIE`);
+    })
+    
+  }, [isOn])
+
   // useEffect(() => {
-  //   if (isOn) {
-  //     console.log(`IsOn!`);
-  //   }
-  // })
+  //   const interval = setInterval(() => console.log('tick'), 1000);
+
+  //   return () => clearInterval(interval);
+  // });
+
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => console.log('tick'), 1000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
+
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => console.log('tick'), 1000);
+
+  //   return () => clearInterval(interval);
+  // }, [isOn]);
+
 
 
   // useEffect(() => {
   //   if (isOn === false) {
   //     console.log(`IsOff!`);
   //   }
-  // })
+  // }, [isOn])
 
 
 
@@ -67,11 +107,11 @@ const Crypto = () => {
 
 
         let newCryptoList = [];
-         console.log(newCryptoList);
+        // console.log(newCryptoList);
 
         for (const [tickerElem, cryptoRateObj] of Object.entries(ratesObj)) {
 
-         
+
 
           let newObj = {
             currency: tickerElem,
@@ -84,11 +124,12 @@ const Crypto = () => {
 
           // console.log(newObj);
           // newCryptoList.push(newObj);
-         
+
 
         }
 
 
+        setCryptoRates(ratesObj)
 
       })
   }
