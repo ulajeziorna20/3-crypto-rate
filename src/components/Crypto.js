@@ -15,12 +15,13 @@ import axios from "axios";
 
 
 
-const Crypto = () => {
+const Crypto = (props) => {
 
   const [cryptoRates, setCryptoRates] = useState({})
   const [isOn, setIsOn] = useState(false)
 
- 
+
+
 
   useEffect(() => {
     const interval = setInterval(() => { getCryptoRates() }, 5000);
@@ -32,10 +33,10 @@ const Crypto = () => {
       clearInterval(interval)
     })
   }, []);
-  // tylko przy stworzeniu komponentu -->  pierwsze renderowanie
+  // tylko przy stworzeniu komponentu -->  pierwsze renderowanie. Ale jeśli komponent umrze(cos wstawimy i zapiszemy na przyklad) i znowu się narodzi wtedy on najpierw zakonczy zywot returnem a potem znowu sie odrodzi
 
 
-  // nie ma drugiejo parametru. nie wazne ktory stan sie zmieni
+  // nie ma drugiejo parametru. nie wazne ktory stan sie zmieni uruchomi sie wtedy useEffect
   // useEffect(() => {
   //   console.log(`moj useEffect`);
 
@@ -44,21 +45,31 @@ const Crypto = () => {
   //   })
   // })
 
+
+
+
+  // UseEffect reaguje tylko na zmiane konkretnego stanu/stanów. 
   useEffect(() => {
-   
+
     // if (isOn) {
     //   console.log(`IsOn!`);
     // } else {
     //   console.log(`IsOff!`);
     // }
-    
+    const myColor = () => {
+      return props.color
+    }
+
+
     console.log(`useEffect ON/OFF`);
+    console.log(myColor());
+
 
     return (() => {
-      console.log(`useEffect ON/OFF KONCZY SIE`);
+      console.log(`useE ffect ON/OFF KONCZY SIE`);
     })
-    
-  }, [isOn])
+
+  }, [props.color, isOn])
 
   // useEffect(() => {
   //   const interval = setInterval(() => console.log('tick'), 1000);
@@ -144,6 +155,13 @@ const Crypto = () => {
         <button onClick={() => {
           setIsOn((isOn) => !isOn)
         }}>{isOn ? `off` : `on`}</button>
+        <button onClick={() => {
+          props.setColor((props.color === `blue`) ? `red` : `blue`)
+
+        }} className={props.color}>
+          {props.color}
+        </button>
+
         <FontAwesomeIcon icon={faBitcoin} />
         <h1 className="title-crypto">Crypto Rate</h1>
       </header>

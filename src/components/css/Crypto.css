@@ -39,3 +39,11 @@ h1 {
 .inp-crypto-filter:hover {
   border-color: turquoise;
 }
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
