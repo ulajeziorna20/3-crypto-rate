@@ -59,8 +59,10 @@ const Crypto = (props) => {
             sell: cryptoRateObj.sell,
             buy: cryptoRateObj.buy,
             lastRatePrice: cryptoRateObj.last
-
           }
+
+
+          let oldObj = newObj;
           // console.log(newObj);
           newCryptoList.push(newObj);
         }
