@@ -5,12 +5,15 @@ import './css/CryptoList.css';
 
 const CryptoList = (props) => {
 
-  // let cryptoCoursesList = props.data.map((ticker) => {
+  let cryptoRatesListJSX = props.cryptoRates.map((ticker) => {
 
-  //   // return (
-  //   //   <li className="ticker-item">Last rate: {ticker.}</li>
-  //   // )
-  // })
+    return (
+      <li className="ticker-item">Last rate: {ticker.lastRatePrice},{ticker.currency}, {ticker.symbol}</li>
+    )
+
+    
+  })
+  console.log(cryptoRatesListJSX);
 
   
   return (
