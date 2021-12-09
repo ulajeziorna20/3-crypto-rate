@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import './css/Crypto.css'
-
 // get our fontawesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 import CryptoList from "./CryptoList";
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
 // axios
 import axios from "axios";
+
 
 
 
@@ -22,16 +20,16 @@ const Crypto = (props) => {
 
 
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => { getCryptoRates() }, 5000);
-  //   // console.log(`on`);
+  useEffect(() => {
+    const interval = setInterval(() => { getCryptoRates() }, 10000);
+    // console.log(`on`);
 
-  //   console.log(`useEffect interval`);
-  //   return (() => {
-  //     console.log(`useEffect interval KONCZY SIE `);
-  //     clearInterval(interval)
-  //   })
-  // }, []);
+    console.log(`useEffect interval`);
+    return (() => {
+      console.log(`useEffect interval KONCZY SIE `);
+      clearInterval(interval)
+    })
+  }, []);
 
 
 
@@ -82,7 +80,7 @@ const Crypto = (props) => {
       <div className="crypto-filter-container">
         <input className="inp-crypto-filter" placeholder="Filter"></input>
       </div>
-      <section>
+      <section className="crypto-list">
         <CryptoList cryptoRates={cryptoRates} />
       </section>
     </section>
