@@ -92,3 +92,16 @@
 }} className={props.color}>
   {props.color}
 </button> */}
+
+
+
+
+
+
+
+
+
+
+
+// let randomQuote = arrQuotes[Math.floor(Math.random() * arrQuotes.length)];
+// console.log(randomQuote);

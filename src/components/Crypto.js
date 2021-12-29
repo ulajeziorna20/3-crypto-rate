@@ -11,28 +11,22 @@ import axios from "axios";
 
 
 
-
-
 const Crypto = (props) => {
 
   const [cryptoRates, setCryptoRates] = useState([])
   // console.log(cryptoRates);
 
 
-
   useEffect(() => {
-    const interval = setInterval(() => { getCryptoRates() }, 10000);
+    const interval = setInterval(() => { getCryptoRates() }, 5000);
     // console.log(`on`);
 
-    console.log(`useEffect interval`);
+    // console.log(`useEffect interval`);
     return (() => {
-      console.log(`useEffect interval KONCZY SIE `);
+      // console.log(`useEffect interval KONCZY SIE `);
       clearInterval(interval)
     })
   }, []);
-
-
-
 
 
   // pobieranie danych o kursach walut
@@ -42,33 +36,53 @@ const Crypto = (props) => {
     })
       .then(res => {
         // console.log(res.data);
+        
 
         const ratesObj = res.data;
-        console.log(ratesObj);
+        // console.log(ratesObj);
 
-        // dlaczego last tutaj?
-        // let lastCryptoList = [];
         let newCryptoList = [];
-        // console.log(newCryptoList);
+
+        let arrowUp = String.fromCharCode(8593)
+        // arrowUp.cssClass = 'green'
+        // console.log(arrowUp);
+        let arrowDown = String.fromCharCode(8595)
+        // arrowDown.cssClass = 'blue'
+        // console.log(arrowDown);
+        let arrowEqual = String.fromCharCode(8594)
+        // arrowEqual.cssClass = 'red'
+        // console.log(arrowEqual);
+
+        console.log(cryptoRates);
 
         for (const [tickerElem, cryptoRateObj] of Object.entries(ratesObj)) {
+          // console.log(cryptoRateObj);
+        
+
+          // let oldCryptoList = cryptoRates.find( (obj, index) => console.log(obj[index]))
+          // console.log(oldCryptoList);
+
 
           let newObj = {
             currency: tickerElem,
-            symbol: cryptoRateObj.symbol,
             sell: cryptoRateObj.sell,
             buy: cryptoRateObj.buy,
-            lastRatePrice: cryptoRateObj.last
+            lastRatePrice: cryptoRateObj.last,
+            symbol: cryptoRateObj.symbol
           }
 
+          // if (newObj.lastRatePrice === oldCryptoList) => {
 
-          let oldObj = newObj;
-          // console.log(newObj);
+          // }
+
           newCryptoList.push(newObj);
+          // oldCryptoList.push(cryptoRateObj.last)
+          // oldCryptoList.push(oldObj);
         }
-   
+
+        console.log(newCryptoList);
+        // console.log(oldCryptoList);
         setCryptoRates(newCryptoList)
-       
       })
   }
 
