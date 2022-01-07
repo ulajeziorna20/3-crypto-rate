@@ -7,20 +7,18 @@ import uniqueId from 'lodash.uniqueid';
 
 const CryptoList = (props) => {
 
+
   let cryptoRatesListJSX = props.cryptoRates.map((ticker) => {
 
     return (
       <li className="ticker-item" key={uniqueId('crypto')}>
         <span className="black">Last rate:</span>
-        <span className="lastRatePric pink" >{ticker.lastRatePrice}
-          <span id="charArrow">&harr;</span>
+        <span className={ticker.cssColor} >{ticker.lastRatePrice}
         </span>
-        <span className="currency pink">{ticker.currency} </span>
+        <span className={`arrow ${ticker.cssColor}`} >{ticker.arrow}</span>
         <span className="symbol black">{ticker.symbol}</span>
       </li>
     )
-
-
   })
   // console.log(cryptoRatesListJSX);
 

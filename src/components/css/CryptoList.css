@@ -1,11 +1,14 @@
 .black {
   color: black;
+  margin-right: 25px;
 }
 
 .pink {
   color: pink;
 }
 
-#charArrow {
-  color: blue;
+
+.arrow  {
+  margin-left: 15px;
+  margin-right: 15px;
 }
