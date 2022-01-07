@@ -15,19 +15,18 @@ const Crypto = (props) => {
 
   const [cryptoRates, setCryptoRates] = useState([])
   const [inpValue, setInpValue] = useState('')
-  const [currentList, setCurrentList] = useState([])
   // console.log(cryptoRates);
 
 
   useEffect(() => {
     const interval = setInterval(getCryptoRates, 5000)
 
-    // getCryptoRates() // ODKOMENTUJ TO, ABY POBIERAŁO PRZY STARCIE
+    getCryptoRates() // ODKOMENTUJ TO, ABY POBIERAŁO PRZY STARCIE
 
     return () => {
       clearInterval(interval)
     }
-  }, [cryptoRates])
+  }, [])
 
   // pobieranie danych o kursach walut
   const getCryptoRates = () => {
@@ -51,7 +50,7 @@ const Crypto = (props) => {
 
 
         for (const [tickerElem, cryptoRateObj] of Object.entries(ratesObj)) {
-          // console.log(cryptoRateObj);
+          console.log(cryptoRateObj);
 
           let oldCryptoObj = cryptoRates.find((cryptoObj) => {
             return cryptoObj.currency === tickerElem
@@ -91,13 +90,15 @@ const Crypto = (props) => {
             }
 
           }
+
+       
           newCryptoList.push(newObj)
-          setCurrentList(newCryptoList)
+
+          // oldCryptoList.push(cryptoRateObj.last)
+          // oldCryptoList.push(oldObj);
         }
 
-        filterCryptoList()
-
-
+        setCryptoRates(newCryptoList)
       })
   }
 
@@ -111,27 +112,9 @@ const Crypto = (props) => {
   }
 
 
-  const filterCryptoList = () => {
-
-    let filteredTickers = currentList.filter((obj) => {
-      // console.log(obj.currency);
-
-      let string = inpValue.toLocaleLowerCase();
-
-      if (obj.currency.toLowerCase().includes(string)) {
-        console.log(obj.currency);
-        return true
-      }
-    })
-
-    setCryptoRates((prevCryptoRates) => {
-      // console.log(prevCryptoRates)
-
-      return filteredTickers
-    })
-  }
 
 
+  
 
 
   return (
