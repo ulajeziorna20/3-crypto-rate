@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import './css/CryptoList.css';
 // iniquedID
 import uniqueId from 'lodash.uniqueid';
@@ -8,7 +7,7 @@ import uniqueId from 'lodash.uniqueid';
 const CryptoList = (props) => {
 
 
-  let cryptoRatesListJSX = props.cryptoRates.map((ticker) => {
+  let cryptoRatesListJSX = props.cryptoList.map((ticker) => {
 
     return (
       <li className="ticker-item" key={uniqueId('crypto')}>

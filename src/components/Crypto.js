@@ -11,23 +11,16 @@ import axios from "axios";
 
 
 
+
 const Crypto = (props) => {
 
   const [cryptoRates, setCryptoRates] = useState([])
+  const [cryptoRatesFiltered, setCryptoRatesFiltered] = useState([])
   const [inpValue, setInpValue] = useState('')
   // console.log(cryptoRates);
 
 
-  useEffect(() => {
-    const interval = setInterval(getCryptoRates, 5000)
-
-    getCryptoRates() // ODKOMENTUJ TO, ABY POBIERAŁO PRZY STARCIE
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
+ 
   // pobieranie danych o kursach walut
   const getCryptoRates = () => {
     axios
@@ -50,7 +43,7 @@ const Crypto = (props) => {
 
 
         for (const [tickerElem, cryptoRateObj] of Object.entries(ratesObj)) {
-          console.log(cryptoRateObj);
+          // console.log(cryptoRateObj);
 
           let oldCryptoObj = cryptoRates.find((cryptoObj) => {
             return cryptoObj.currency === tickerElem
@@ -63,7 +56,6 @@ const Crypto = (props) => {
             lastRatePrice: cryptoRateObj.last,
             symbol: cryptoRateObj.symbol,
           }
-
 
           if (oldCryptoObj === undefined) {
             newObj.arrow = arrowEqual
@@ -88,19 +80,28 @@ const Crypto = (props) => {
               // stworzenie obiektu z kolorem
               newObj.cssColor = 'green'
             }
-
           }
-
-       
           newCryptoList.push(newObj)
 
           // oldCryptoList.push(cryptoRateObj.last)
           // oldCryptoList.push(oldObj);
         }
-
         setCryptoRates(newCryptoList)
+        // console.log(newCryptoList);
+        // console.log(filters(newCryptoList));
       })
   }
+
+
+  useEffect(() => {
+    // const interval = setInterval(getCryptoRates(), 5000)
+
+    getCryptoRates() // ODKOMENTUJ TO, ABY POBIERAŁO PRZY STARCIE
+
+    // return () => {
+    //   clearInterval(interval)
+    // }
+  }, [])
 
 
 
@@ -112,9 +113,34 @@ const Crypto = (props) => {
   }
 
 
+  useEffect(() => {
+
+    const filters = () => {
+      // console.log(cryptoRates);
+
+      let filteredList = cryptoRates.filter((element) => {
+
+        // console.log(element);
+        let inpString = inpValue.trim().toLocaleLowerCase()
+
+        if (element.currency.toLowerCase().includes(inpString)) {
+          return true
+        }
+        return false
+      })
+
+      setCryptoRatesFiltered(filteredList)
+      // setCryptoList(filteredList)
+    }
+    filters()
+
+  }, [inpValue, cryptoRates])
 
 
-  
+
+
+
+
 
 
   return (
@@ -127,7 +153,7 @@ const Crypto = (props) => {
         <input className="inp-crypto-filter" placeholder="Filter" onChange={inputHandleChange} value={inpValue}></input>
       </div>
       <section className="crypto-list">
-        <CryptoList cryptoRates={cryptoRates} />
+        <CryptoList cryptoList={cryptoRatesFiltered} />
       </section>
     </section>
   )
